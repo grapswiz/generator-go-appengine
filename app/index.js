@@ -7,48 +7,51 @@ var chalk = require('chalk');
 
 
 var GoAppengineGenerator = yeoman.generators.Base.extend({
-  init: function () {
-    this.pkg = require('../package.json');
+    init: function () {
+        this.pkg = require('../package.json');
 
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.installDependencies();
-      }
-    });
-  },
+        this.on('end', function () {
+            if (!this.options['skip-install']) {
+                this.installDependencies();
+            }
+        });
+    },
 
-  askFor: function () {
-    var done = this.async();
+    askFor: function () {
+        var done = this.async();
 
-    // Have Yeoman greet the user.
-    this.log(yosay('Welcome to the marvelous GoAppengine generator!'));
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+        // Have Yeoman greet the user.
+        this.log(yosay('Welcome to the marvelous GoAppengine generator!'));
 
-    this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+        var prompts = [
+            {
+                type: 'confirm',
+                name: 'someOption',
+                message: 'Would you like to enable this option?',
+                default: true
+            }
+        ];
 
-      done();
-    }.bind(this));
-  },
+        this.prompt(prompts, function (props) {
+            this.someOption = props.someOption;
 
-  app: function () {
-    this.mkdir('app');
-    this.mkdir('app/templates');
+            done();
+        }.bind(this));
+    },
 
-    this.copy('_package.json', 'package.json');
-    this.copy('_bower.json', 'bower.json');
-  },
+    app: function () {
+        this.mkdir('app');
+        this.mkdir('app/templates');
 
-  projectfiles: function () {
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc', '.jshintrc');
-  }
+        this.copy('_package.json', 'package.json');
+        this.copy('_bower.json', 'bower.json');
+    },
+
+    projectfiles: function () {
+        this.copy('editorconfig', '.editorconfig');
+        this.copy('jshintrc', '.jshintrc');
+    }
 });
 
 module.exports = GoAppengineGenerator;
