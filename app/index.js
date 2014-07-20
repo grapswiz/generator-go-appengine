@@ -20,21 +20,23 @@ var GoAppengineGenerator = yeoman.generators.Base.extend({
     askFor: function () {
         var done = this.async();
 
+        this.appId = this.args[0] || undefined;
 
         // Have Yeoman greet the user.
-        this.log(yosay('Welcome to the marvelous GoAppengine generator!'));
+        this.log(yosay('Welcome to the marvelous GoAppEngine generator!'));
 
         var prompts = [
             {
-                type: 'confirm',
-                name: 'someOption',
-                message: 'Would you like to enable this option?',
-                default: true
+                name: 'appId',
+                message: 'What is the application ID?',
+                default: path.basename(process.cwd())
             }
         ];
 
         this.prompt(prompts, function (props) {
-            this.someOption = props.someOption;
+            Object.keys[props].forEach(function(value, index) {
+                this[index] = value;
+            });
 
             done();
         }.bind(this));
@@ -43,14 +45,11 @@ var GoAppengineGenerator = yeoman.generators.Base.extend({
     app: function () {
         this.mkdir('app');
         this.mkdir('app/templates');
-
-        this.copy('_package.json', 'package.json');
-        this.copy('_bower.json', 'bower.json');
     },
 
     projectfiles: function () {
+        this.template('app.yaml.template', 'app.yaml');
         this.copy('editorconfig', '.editorconfig');
-        this.copy('jshintrc', '.jshintrc');
     }
 });
 
