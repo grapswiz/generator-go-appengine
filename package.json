@@ -1,6 +1,6 @@
 {
     "name": "generator-go-appengine",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Yeoman generator for go appengine",
     "license": "MIT",
     "main": "app/index.js",
