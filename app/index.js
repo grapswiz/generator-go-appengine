@@ -7,16 +7,6 @@ var chalk = require('chalk');
 
 
 var GoAppengineGenerator = yeoman.generators.Base.extend({
-    init: function () {
-        this.pkg = require('../package.json');
-
-        this.on('end', function () {
-            if (!this.options['skip-install']) {
-                this.installDependencies();
-            }
-        });
-    },
-
     askFor: function () {
         var done = this.async();
 
@@ -34,22 +24,25 @@ var GoAppengineGenerator = yeoman.generators.Base.extend({
         ];
 
         this.prompt(prompts, function (props) {
-            Object.keys[props].forEach(function(value, index) {
-                this[index] = value;
-            });
+            for (var prop in props) {
+                this[prop] = props[prop];
+            }
 
             done();
         }.bind(this));
     },
 
     app: function () {
-        this.mkdir('app');
-        this.mkdir('app/templates');
+        this.template('app.go', 'app.go');
+        this.template('index.html', 'index.html');
     },
 
     projectfiles: function () {
-        this.template('app.yaml.template', 'app.yaml');
         this.copy('editorconfig', '.editorconfig');
+    },
+
+    appEngineFiles: function () {
+        this.template('app.yaml.template', 'app.yaml');
     }
 });
 
