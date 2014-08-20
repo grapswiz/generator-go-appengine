@@ -1,12 +1,12 @@
 {
     "name": "generator-go-appengine",
     "version": "0.0.1",
-    "description": "Yeoman generator",
+    "description": "Yeoman generator for go appengine",
     "license": "MIT",
     "main": "app/index.js",
     "repository": "grapswiz/generator-go-appengine",
     "author": {
-        "name": "",
+        "name": "grapswiz",
         "email": "ineeza@gmail.com",
         "url": "https://github.com/grapswiz"
     },
